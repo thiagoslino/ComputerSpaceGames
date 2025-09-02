@@ -32,11 +32,11 @@ You need to have Cuis Smalltalk installed.
     git clone https://github.com/thiagoslino/Cuis-ComputerSpaceGames.git
     ```
 2.  Open the Cuis-Smalltalk image.
-3.  In Cuis,open a workspace in Cuis and type:
+3.  In Cuis, open a workspace and type (or drop the ComputerSpaceGames.pck.st file into a running Cuis and click 'install package'):
 ```smalltalk
   Feature require: #ComputerSpaceGames
 ```
-4.  To start the game, evaluate the following in a workspace (or follow the specific instructions in the class comment):
+4.  To start the game, evaluate the following in a workspace:
     ```smalltalk
     EvilAlienPresenter new start.
     ```
