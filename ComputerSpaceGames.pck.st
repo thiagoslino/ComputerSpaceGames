@@ -1,98 +1,118 @@
-'From Cuis7.5 [latest update: #7472] on 2 September 2025 at 5:47:44 pm'!
+'From Cuis7.5 [latest update: #7526] on 7 September 2025 at 12:44:16 pm'!
 'Description Implementation of classic text-based games, based on the listings from the Computer Space Games magazine.'!
-!provides: 'ComputerSpaceGames' 1 2!
-SystemOrganization addCategory: 'ComputerSpaceGames-Model'!
-SystemOrganization addCategory: 'ComputerSpaceGames-View'!
-SystemOrganization addCategory: 'ComputerSpaceGames-Presenter'!
+!provides: 'ComputerSpaceGames' 1 3!
+SystemOrganization addCategory: #'ComputerSpaceGames-Model'!
+SystemOrganization addCategory: #'ComputerSpaceGames-View'!
+SystemOrganization addCategory: #'ComputerSpaceGames-Presenter'!
 
 
-!classDefinition: #EvilAlien category: 'ComputerSpaceGames-Model'!
+!classDefinition: #EvilAlien category: #'ComputerSpaceGames-Model'!
 Object subclass: #EvilAlien
 	instanceVariableNames: 'maxAttempts attempts gridSize elronPositionX elronPositionY elronDistance'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Model'!
-!classDefinition: 'EvilAlien class' category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'EvilAlien class' category: #'ComputerSpaceGames-Model'!
 EvilAlien class
 	instanceVariableNames: ''!
 
-!classDefinition: #IntergalacticGames category: 'ComputerSpaceGames-Model'!
+!classDefinition: #IntergalacticGames category: #'ComputerSpaceGames-Model'!
 Object subclass: #IntergalacticGames
 	instanceVariableNames: 'maxAttempts attempts height'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Model'!
-!classDefinition: 'IntergalacticGames class' category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'IntergalacticGames class' category: #'ComputerSpaceGames-Model'!
 IntergalacticGames class
 	instanceVariableNames: ''!
 
-!classDefinition: #StarshipTakeOff category: 'ComputerSpaceGames-Model'!
+!classDefinition: #Moonlander category: #'ComputerSpaceGames-Model'!
+Object subclass: #Moonlander
+	instanceVariableNames: 'time height velocity fuel'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'Moonlander class' category: #'ComputerSpaceGames-Model'!
+Moonlander class
+	instanceVariableNames: ''!
+
+!classDefinition: #StarshipTakeOff category: #'ComputerSpaceGames-Model'!
 Object subclass: #StarshipTakeOff
 	instanceVariableNames: 'gravity weight secretNumber maxAttempts attempts'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Model'!
-!classDefinition: 'StarshipTakeOff class' category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'StarshipTakeOff class' category: #'ComputerSpaceGames-Model'!
 StarshipTakeOff class
 	instanceVariableNames: ''!
 
-!classDefinition: #EvilAlienPresenter category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: #EvilAlienPresenter category: #'ComputerSpaceGames-Presenter'!
 Object subclass: #EvilAlienPresenter
 	instanceVariableNames: 'model view xPosition yPosition distance'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Presenter'!
-!classDefinition: 'EvilAlienPresenter class' category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'EvilAlienPresenter class' category: #'ComputerSpaceGames-Presenter'!
 EvilAlienPresenter class
 	instanceVariableNames: ''!
 
-!classDefinition: #IntergalacticGamesPresenter category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: #IntergalacticGamesPresenter category: #'ComputerSpaceGames-Presenter'!
 Object subclass: #IntergalacticGamesPresenter
 	instanceVariableNames: 'model view angle speed'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Presenter'!
-!classDefinition: 'IntergalacticGamesPresenter class' category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'IntergalacticGamesPresenter class' category: #'ComputerSpaceGames-Presenter'!
 IntergalacticGamesPresenter class
 	instanceVariableNames: ''!
 
-!classDefinition: #StarshipTakeOffPresenter category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: #MoonlanderPresenter category: #'ComputerSpaceGames-Presenter'!
+Object subclass: #MoonlanderPresenter
+	instanceVariableNames: 'model view'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'MoonlanderPresenter class' category: #'ComputerSpaceGames-Presenter'!
+MoonlanderPresenter class
+	instanceVariableNames: ''!
+
+!classDefinition: #StarshipTakeOffPresenter category: #'ComputerSpaceGames-Presenter'!
 Object subclass: #StarshipTakeOffPresenter
 	instanceVariableNames: 'model view'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-Presenter'!
-!classDefinition: 'StarshipTakeOffPresenter class' category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'StarshipTakeOffPresenter class' category: #'ComputerSpaceGames-Presenter'!
 StarshipTakeOffPresenter class
 	instanceVariableNames: ''!
 
-!classDefinition: #ClassicGameModelMorph category: 'ComputerSpaceGames-View'!
+!classDefinition: #ClassicGameModelMorph category: #'ComputerSpaceGames-View'!
 TextModelMorph subclass: #ClassicGameModelMorph
 	instanceVariableNames: 'presenter inputBuffer promptString consoleText'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-View'!
-!classDefinition: 'ClassicGameModelMorph class' category: 'ComputerSpaceGames-View'!
+!classDefinition: 'ClassicGameModelMorph class' category: #'ComputerSpaceGames-View'!
 ClassicGameModelMorph class
 	instanceVariableNames: ''!
 
-!classDefinition: #ClassicGameView category: 'ComputerSpaceGames-View'!
+!classDefinition: #ClassicGameView category: #'ComputerSpaceGames-View'!
 SystemWindow subclass: #ClassicGameView
 	instanceVariableNames: 'presenter textModelMorph'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-View'!
-!classDefinition: 'ClassicGameView class' category: 'ComputerSpaceGames-View'!
+!classDefinition: 'ClassicGameView class' category: #'ComputerSpaceGames-View'!
 ClassicGameView class
 	instanceVariableNames: ''!
 
-!classDefinition: #ClassicGameInnerTextMorph category: 'ComputerSpaceGames-View'!
+!classDefinition: #ClassicGameInnerTextMorph category: #'ComputerSpaceGames-View'!
 InnerTextMorph subclass: #ClassicGameInnerTextMorph
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ComputerSpaceGames-View'!
-!classDefinition: 'ClassicGameInnerTextMorph class' category: 'ComputerSpaceGames-View'!
+!classDefinition: 'ClassicGameInnerTextMorph class' category: #'ComputerSpaceGames-View'!
 ClassicGameInnerTextMorph class
 	instanceVariableNames: ''!
 
@@ -193,6 +213,63 @@ gameDescription
 	^ 'There is fierce competition among the world''s TV companies for exclusive coverage of the First Intergalactic Games. Everything depends on wich company wins the race to put satellite into orbit at right height.
 You are Engineer in charge of the launch for new Century TV. The crucial decisions about the angle and speed of the launching rocket rests on yout shoulders.
 Can you do it?'! !
+
+!Moonlander methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:14:33'!
+initialize
+	super initialize.
+	time := 0.
+	height := 500.
+	velocity := 50.
+	fuel := 120.! !
+
+!Moonlander methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:19:13'!
+reset
+	self initialize ! !
+
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:09'!
+fuel
+	^fuel! !
+
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:25'!
+height
+	^height ! !
+
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:00'!
+time
+	^time! !
+
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:15'!
+velocity
+	^velocity! !
+
+!Moonlander methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:40:28'!
+burn: aNumber
+	| b v1 |
+	b := aNumber.
+
+	fuel = 0 ifFalse: [
+		b < 0 ifTrue: [ b := 0].
+		b > 30 ifTrue: [ b := 30]].
+	b > fuel ifTrue: [ b := fuel].
+
+	v1 := velocity - b + 5.
+	fuel := fuel - b.
+	(v1 + velocity / 2) >= height ifFalse: [
+		height := height - (v1 + velocity / 2).
+		time := time + 1.
+		velocity := v1.
+		^ #continue].
+	v1 := velocity + ((5-b) * height  / velocity).
+	v1 > 5 ifTrue: [ ^#crash].
+	v1 > 1 ifTrue: [ ^#okButSomeInjuries].
+	v1 <= 1 ifTrue: [ ^#goodLanding].
+	! !
+
+!Moonlander class methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:14:07'!
+gameDescription
+	"Computer Space Games, page 12"
+	^ 'You are at the controls os a lunar module wich is taking a small team os astronauts down to the moon''s surface. In order to land safely you must slow down your descent, but that takes fuel and you have only a limited supply.
+Your computer will tell you your starting height, speed and fuel supply and ask how much fuel you wish to burn. It will then work out your new height and speed. A burn of 5 will keep your speed constant. A higher number will reduce it. Can you land safely on the moon?'! !
 
 !StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:10:38'!
 initialize
@@ -444,6 +521,64 @@ start
 	self showMessage: model class gameDescription.
 	self showStartMessage.
 	self showRequestAngleMessage.
+	view newPrompt.
+	view openInWorld.! !
+
+!MoonlanderPresenter methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:02:33'!
+initialize
+	super initialize.
+	model := Moonlander new.
+	view := ClassicGameView presenter: self.
+	view setLabel: 'MOONLANDER'.
+	view openInWorld.! !
+
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:13:32'!
+handleInput: aString
+	| number result |
+	number := [aString asNumber] 
+		on: Error do: [
+			self showMessage: 'Invalid input. Please enter a number.'.
+			^ view newPrompt ].
+	
+	result := model burn: number.
+	result caseOf: {
+		[#continue] -> [ 
+			self showStatusMessage .
+			view newPrompt ].
+		[#goodLanding] -> [ 
+			self showMessage: 'Good landing.'.
+			self showMessage: ''.
+			self restart. ].
+		[#okButSomeInjuries]  -> [ 
+			self showMessage: 'Ok - but some injuries'.
+			self showMessage: ''.
+			self restart. ].
+		 [#crash] -> [ 
+			self showMessage: 'You crashed - all dead.'.
+			self showMessage: ''.
+			self restart ] .
+	}.
+	! !
+
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:07:27'!
+restart
+	model reset.
+	self showStatusMessage.
+	view newPrompt.! !
+
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:06:05'!
+showMessage: aMessage
+	view showMessage: aMessage.! !
+
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:30:21'!
+showStatusMessage
+	self showMessage: 'Time ', model time asString, '; Height ', model height asString.
+	self showMessage: 'Vel. ', model velocity asString, '; Fuel ', model fuel asString.! !
+
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:06:40'!
+start
+	self showMessage: model class gameDescription.
+	self showStatusMessage.
 	view newPrompt.
 	view openInWorld.! !
 
