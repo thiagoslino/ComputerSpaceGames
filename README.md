@@ -17,7 +17,8 @@ This repository contains my implementations of classic text-based games, based o
 *   **Intergalactic Games** - You are Engineer in charge of the launch for new Century TV. The crucial decisions about the angle and speed of the launching rocket rests on yout shoulders. Can you do it?.
 *   **Starship Takeoff** - You are a starship captain. You have crashed your ship on a strange planet and must take off again quickly in the alien ship you have captured.
 *   **Moonlander** - Can you land safely on the moon?
-*   *...add more to come...*
+*   **Trip into the future**
+*   *...and more to come...*
 
 ## Getting Started
 

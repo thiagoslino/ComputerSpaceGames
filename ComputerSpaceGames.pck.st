@@ -1,6 +1,6 @@
-'From Cuis7.5 [latest update: #7526] on 7 September 2025 at 12:44:16 pm'!
+'From Cuis7.5 [latest update: #7637] on 5 October 2025 at 7:51:47 pm'!
 'Description Implementation of classic text-based games, based on the listings from the Computer Space Games magazine.'!
-!provides: 'ComputerSpaceGames' 1 3!
+!provides: 'ComputerSpaceGames' 1 4!
 SystemOrganization addCategory: #'ComputerSpaceGames-Model'!
 SystemOrganization addCategory: #'ComputerSpaceGames-View'!
 SystemOrganization addCategory: #'ComputerSpaceGames-Presenter'!
@@ -46,6 +46,16 @@ Object subclass: #StarshipTakeOff
 StarshipTakeOff class
 	instanceVariableNames: ''!
 
+!classDefinition: #TripIntoTheFuture category: #'ComputerSpaceGames-Model'!
+Object subclass: #TripIntoTheFuture
+	instanceVariableNames: 'yearsInTheFuture timeInsideShip timeOutsideShip'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'TripIntoTheFuture class' category: #'ComputerSpaceGames-Model'!
+TripIntoTheFuture class
+	instanceVariableNames: ''!
+
 !classDefinition: #EvilAlienPresenter category: #'ComputerSpaceGames-Presenter'!
 Object subclass: #EvilAlienPresenter
 	instanceVariableNames: 'model view xPosition yPosition distance'
@@ -84,6 +94,16 @@ Object subclass: #StarshipTakeOffPresenter
 	category: 'ComputerSpaceGames-Presenter'!
 !classDefinition: 'StarshipTakeOffPresenter class' category: #'ComputerSpaceGames-Presenter'!
 StarshipTakeOffPresenter class
+	instanceVariableNames: ''!
+
+!classDefinition: #TripIntoTheFuturePresenter category: #'ComputerSpaceGames-Presenter'!
+Object subclass: #TripIntoTheFuturePresenter
+	instanceVariableNames: 'model view distance speed'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'TripIntoTheFuturePresenter class' category: #'ComputerSpaceGames-Presenter'!
+TripIntoTheFuturePresenter class
 	instanceVariableNames: ''!
 
 !classDefinition: #ClassicGameModelMorph category: #'ComputerSpaceGames-View'!
@@ -308,6 +328,49 @@ checkGuess: aNumber
 gameDescription
 	"Computer Space Games, page 4"
 	^ 'You are a starship captain. You have crashed your ship on a strange planet and must take off again quickly in the alien ship you have captured. The ship''s computer tells you the gravity on the planet.'! !
+
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/5/2025 19:44:56'!
+timeInsideShip
+	^ timeInsideShip ! !
+
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/5/2025 19:45:15'!
+timeOutsideShip
+	^ timeOutsideShip ! !
+
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/4/2025 15:29:07'!
+yearsInTheFuture
+	^ yearsInTheFuture ! !
+
+!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:31:52'!
+initialize
+	super initialize.
+	self reset.! !
+
+!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:33:35'!
+reset
+	yearsInTheFuture  := 25 to: 124 :: atRandom ! !
+
+!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:43:40'!
+checkResult
+	timeInsideShip > 50 ifTrue: [ ^ #youDiedOnTheWay ].
+	yearsInTheFuture - timeOutsideShip :: abs <= 5
+		ifTrue: [ ^ #youArrivedOnTime ]
+		ifFalse: [ ^#notEvenClose ].
+	
+! !
+
+!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:44:32'!
+computeDistance: distance speed: speed
+	timeInsideShip := distance / speed.
+	timeOutsideShip := timeInsideShip / (1 - (speed squared) sqrt).
+	
+! !
+
+!TripIntoTheFuture class methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:30:30'!
+gameDescription
+	"Computer Space Games, page 20"
+	^ 'Imagine you are in a spaceship travelling nearly as fast as light. Strangely time is passing more slowly inside your spaceship than outside. So, having set off on a long, fast space trip, you can return to Earth further in the future than the clocks inside your ship indicate.
+In this game, your computer tells you how many years must elapse on Earth before you return. You then decide the length of your trip (in light years) and the speed of your trip (as fraction of the speed of light) in order to achieve this. Take care not to travel too far too slowly or you will die of old age on the way.'! !
 
 !EvilAlienPresenter methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:27:52'!
 initialize
@@ -640,6 +703,78 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
+!TripIntoTheFuturePresenter methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:24:27'!
+initialize
+	super initialize.
+	model := TripIntoTheFuture new.
+	view := ClassicGameView presenter: self.
+	view setLabel: 'TRIP INTO THE FUTURE'.
+	view openInWorld.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:50:18'!
+handleInput: aString
+	| number result |
+	number := [aString asNumber] 
+		on: Error do: [
+			self showMessage: 'Invalid input. Please enter a number.'.
+			^ view newPrompt ].
+	speed isNil ifTrue: [
+		(number >= 1 or:[ number <= 0]) ifTrue: [
+			self showMessage: 'Invalid speed.'.
+			^ view newPrompt ].
+		speed := number.
+		self showRequestDistanceMessage.
+		^ view newPrompt ].
+	distance := number.
+	model computeDistance:  distance speed: speed.
+	self showMessage: 'You took ', model timeInsideShip asString, ' years' .
+	self showMessage: 'and arrived ', model timeOutsideShip asString, ' in the future.'.
+	result := model checkResult.
+	result caseOf: {
+		[#youDiedOnTheWay]  -> [ self showMessage: 'You died on the way.' ].
+		[#youArrivedOnTime] -> [ self showMessage: 'You arrived on time.' ].
+		[#notEvenClose] -> [ self showMessage: 'Not even close.' ] .
+	}.
+	self showMessage: ''.
+	self restart.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:59:40'!
+restart
+	model reset.
+	self restartInputs.
+	self showStartMessage.
+	self showRequestSpeedMessage.
+	view newPrompt.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:56:45'!
+restartInputs
+	distance := nil.
+	speed := nil.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:26:21'!
+showMessage: aMessage
+	view showMessage: aMessage.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:58:42'!
+showRequestDistanceMessage
+	self showMessage: 'Distance of the trip'.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:57:58'!
+showRequestSpeedMessage
+	self showMessage: 'Speed of ship (0-1)'.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:55:36'!
+showStartMessage
+	self showMessage: 'You wish to return ', model yearsInTheFuture asString, ' years in the future.'.! !
+
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:59:03'!
+start
+	self showMessage: model class gameDescription.
+	self showStartMessage.
+	self showRequestSpeedMessage.
+	view newPrompt.
+	view openInWorld.! !
+
 !ClassicGameModelMorph methodsFor: 'accessing' stamp: 'tsl 8/24/2025 19:18:10'!
 presenter: aPresenter
 	presenter := aPresenter ! !
@@ -687,7 +822,7 @@ showMessage: aString
 	consoleText := consoleText , aString , String crString.
 	self refreshView.! !
 
-!ClassicGameModelMorph methodsFor: 'events' stamp: 'tsl 8/24/2025 19:25:04'!
+!ClassicGameModelMorph methodsFor: 'events' stamp: 'tsl 10/4/2025 16:15:30'!
 keyStroke: evt
 
 	evt isReturnKey ifTrue: [
@@ -700,7 +835,7 @@ keyStroke: evt
 		self refreshView ].
 		^ true ].
 
-	(evt isAlphaNumeric) ifTrue: [
+	(evt isAlphaNumeric or: [evt keyValue = 46]) ifTrue: [
  		inputBuffer := inputBuffer , evt keyCharacter asString.
 		self refreshView.
 		^ true ].
