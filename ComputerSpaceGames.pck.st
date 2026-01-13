@@ -1,6 +1,6 @@
-'From Cuis7.5 [latest update: #7637] on 5 October 2025 at 7:51:47 pm'!
+'From Cuis7.7 [latest update: #7797] on 13 January 2026 at 8:23:56 pm'!
 'Description Implementation of classic text-based games, based on the listings from the Computer Space Games magazine.'!
-!provides: 'ComputerSpaceGames' 1 4!
+!provides: 'ComputerSpaceGames' 1 5!
 SystemOrganization addCategory: #'ComputerSpaceGames-Model'!
 SystemOrganization addCategory: #'ComputerSpaceGames-View'!
 SystemOrganization addCategory: #'ComputerSpaceGames-Presenter'!
@@ -137,30 +137,30 @@ ClassicGameInnerTextMorph class
 	instanceVariableNames: ''!
 
 
-!EvilAlien methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:45:12'!
+!EvilAlien methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:45:12'!
 initialize
 	super initialize.
 	maxAttempts := 4.
 	gridSize := 10.
 	self reset.! !
 
-!EvilAlien methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:20:21'!
+!EvilAlien methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:20:21'!
 initializeElronPosition
 	elronPositionX := 0 to: gridSize -1  :: atRandom.
 	elronPositionY := 0 to: gridSize -1  :: atRandom.
 	elronDistance := 0 to: gridSize -1  :: atRandom.! !
 
-!EvilAlien methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:21:03'!
+!EvilAlien methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:21:03'!
 reset
 	attempts := 0.
 	self initializeElronPosition 
 	! !
 
-!EvilAlien methodsFor: 'accessing' stamp: 'tsl 9/2/2025 16:21:51'!
+!EvilAlien methodsFor: 'accessing' stamp: 'tsl 2/Sep/2025 16:21:51'!
 attemptsLeft
 	^ maxAttempts  - attempts! !
 
-!EvilAlien methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:44:46'!
+!EvilAlien methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:44:46'!
 checkXPosition: xPosition yPosition: yPosition distance: distance
 	attempts := attempts + 1.
 	(elronPositionX = xPosition and: [elronPositionY = yPosition] and:[ elronDistance = distance])
@@ -174,7 +174,7 @@ checkXPosition: xPosition yPosition: yPosition distance: distance
 	distance > elronDistance ifTrue: [ ^ #tooFar. ].
 	distance < elronDistance ifTrue: [ ^ #notFarEnough ].! !
 
-!EvilAlien class methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:46:10'!
+!EvilAlien class methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:46:10'!
 gameDescription
 	"Computer Space Games, page 8"
 	^ 'Somewhere beneath you, in deepest, blackest space, lurks Elron, the Evil Alien. You have managed to deactivate all but his short-range weapons but he can still make his ship invisible.
@@ -194,26 +194,26 @@ You have four space bombs. Each one can explode at a position in the grid specif
 0-----------9  (south)
 (west)   x position        (east)'! !
 
-!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:59:33'!
+!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:59:33'!
 initialize
 	super initialize.
 	maxAttempts := 8.
 	self reset.! !
 
-!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 8/31/2025 18:31:29'!
+!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 31/Aug/2025 18:31:29'!
 reset
 	attempts := 0.
 	height :=  1 + (1 to: 100  :: atRandom).! !
 
-!IntergalacticGames methodsFor: 'accessing' stamp: 'tsl 8/31/2025 18:32:33'!
+!IntergalacticGames methodsFor: 'accessing' stamp: 'tsl 31/Aug/2025 18:32:33'!
 attemptsLeft
 	^ maxAttempts  - attempts! !
 
-!IntergalacticGames methodsFor: 'accessing' stamp: 'tsl 8/31/2025 18:48:29'!
+!IntergalacticGames methodsFor: 'accessing' stamp: 'tsl 31/Aug/2025 18:48:29'!
 height
 	^ height! !
 
-!IntergalacticGames methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:42:13'!
+!IntergalacticGames methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:42:13'!
 checkLaunchAngle: angle speed: speed
 	| angleResult speedResult |
 	attempts := attempts + 1.
@@ -227,14 +227,14 @@ checkLaunchAngle: angle speed: speed
 	speedResult < -100 ifTrue: [ ^ #tooSlow ].
 	speedResult > 100 ifTrue: [ ^ #tooFast ].! !
 
-!IntergalacticGames class methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 15:54:03'!
+!IntergalacticGames class methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 15:54:03'!
 gameDescription
 	"Computer Space Games, page 6"
 	^ 'There is fierce competition among the world''s TV companies for exclusive coverage of the First Intergalactic Games. Everything depends on wich company wins the race to put satellite into orbit at right height.
 You are Engineer in charge of the launch for new Century TV. The crucial decisions about the angle and speed of the launching rocket rests on yout shoulders.
 Can you do it?'! !
 
-!Moonlander methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:14:33'!
+!Moonlander methodsFor: 'initialization' stamp: 'tsl 7/Sep/2025 12:14:33'!
 initialize
 	super initialize.
 	time := 0.
@@ -242,27 +242,27 @@ initialize
 	velocity := 50.
 	fuel := 120.! !
 
-!Moonlander methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:19:13'!
+!Moonlander methodsFor: 'initialization' stamp: 'tsl 7/Sep/2025 12:19:13'!
 reset
 	self initialize ! !
 
-!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:09'!
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 7/Sep/2025 11:29:09'!
 fuel
 	^fuel! !
 
-!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:25'!
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 7/Sep/2025 11:29:25'!
 height
 	^height ! !
 
-!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:00'!
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 7/Sep/2025 11:29:00'!
 time
 	^time! !
 
-!Moonlander methodsFor: 'accessing' stamp: 'tsl 9/7/2025 11:29:15'!
+!Moonlander methodsFor: 'accessing' stamp: 'tsl 7/Sep/2025 11:29:15'!
 velocity
 	^velocity! !
 
-!Moonlander methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:40:28'!
+!Moonlander methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:40:28'!
 burn: aNumber
 	| b v1 |
 	b := aNumber.
@@ -285,38 +285,38 @@ burn: aNumber
 	v1 <= 1 ifTrue: [ ^#goodLanding].
 	! !
 
-!Moonlander class methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:14:07'!
+!Moonlander class methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:14:07'!
 gameDescription
 	"Computer Space Games, page 12"
 	^ 'You are at the controls os a lunar module wich is taking a small team os astronauts down to the moon''s surface. In order to land safely you must slow down your descent, but that takes fuel and you have only a limited supply.
 Your computer will tell you your starting height, speed and fuel supply and ask how much fuel you wish to burn. It will then work out your new height and speed. A burn of 5 will keep your speed constant. A higher number will reduce it. Can you land safely on the moon?'! !
 
-!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:10:38'!
+!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:10:38'!
 initialize
 	super initialize.
 	maxAttempts := 10.
 	self reset.! !
 
-!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:44:26'!
+!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:44:26'!
 reset
 	attempts := 0.
 	gravity := 1 to: 20 :: atRandom.
 	weight := 1 to: 40 :: atRandom.
 	secretNumber := gravity * weight.! !
 
-!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 8/28/2025 13:15:11'!
+!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 28/Aug/2025 13:15:11'!
 attemptsLeft
 	^ maxAttempts  - attempts! !
 
-!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 8/28/2025 13:34:50'!
+!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 28/Aug/2025 13:34:50'!
 gravity
 	^ gravity ! !
 
-!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 8/28/2025 13:16:05'!
+!StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 28/Aug/2025 13:16:05'!
 secretNumber
 	^ secretNumber! !
 
-!StarshipTakeOff methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:24:19'!
+!StarshipTakeOff methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:24:19'!
 checkGuess: aNumber
 	attempts := attempts + 1.
 	aNumber = secretNumber ifTrue: [ ^ #correct ].
@@ -324,33 +324,33 @@ checkGuess: aNumber
 	aNumber < secretNumber ifTrue: [ ^ #tooLow ].
 	 ^ #tooHigh.! !
 
-!StarshipTakeOff class methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 15:54:28'!
+!StarshipTakeOff class methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 15:54:28'!
 gameDescription
 	"Computer Space Games, page 4"
 	^ 'You are a starship captain. You have crashed your ship on a strange planet and must take off again quickly in the alien ship you have captured. The ship''s computer tells you the gravity on the planet.'! !
 
-!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/5/2025 19:44:56'!
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 5/Oct/2025 19:44:56'!
 timeInsideShip
 	^ timeInsideShip ! !
 
-!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/5/2025 19:45:15'!
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 5/Oct/2025 19:45:15'!
 timeOutsideShip
 	^ timeOutsideShip ! !
 
-!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 10/4/2025 15:29:07'!
+!TripIntoTheFuture methodsFor: 'accessing' stamp: 'tsl 4/Oct/2025 15:29:07'!
 yearsInTheFuture
 	^ yearsInTheFuture ! !
 
-!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:31:52'!
+!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 4/Oct/2025 15:31:52'!
 initialize
 	super initialize.
 	self reset.! !
 
-!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:33:35'!
+!TripIntoTheFuture methodsFor: 'initialization' stamp: 'tsl 4/Oct/2025 15:33:35'!
 reset
 	yearsInTheFuture  := 25 to: 124 :: atRandom ! !
 
-!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:43:40'!
+!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 5/Oct/2025 19:43:40'!
 checkResult
 	timeInsideShip > 50 ifTrue: [ ^ #youDiedOnTheWay ].
 	yearsInTheFuture - timeOutsideShip :: abs <= 5
@@ -359,20 +359,20 @@ checkResult
 	
 ! !
 
-!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:44:32'!
+!TripIntoTheFuture methodsFor: 'as yet unclassified' stamp: 'tsl 5/Oct/2025 19:44:32'!
 computeDistance: distance speed: speed
 	timeInsideShip := distance / speed.
 	timeOutsideShip := timeInsideShip / (1 - (speed squared) sqrt).
 	
 ! !
 
-!TripIntoTheFuture class methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:30:30'!
+!TripIntoTheFuture class methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:30:30'!
 gameDescription
 	"Computer Space Games, page 20"
 	^ 'Imagine you are in a spaceship travelling nearly as fast as light. Strangely time is passing more slowly inside your spaceship than outside. So, having set off on a long, fast space trip, you can return to Earth further in the future than the clocks inside your ship indicate.
 In this game, your computer tells you how many years must elapse on Earth before you return. You then decide the length of your trip (in light years) and the speed of your trip (as fraction of the speed of light) in order to achieve this. Take care not to travel too far too slowly or you will die of old age on the way.'! !
 
-!EvilAlienPresenter methodsFor: 'initialization' stamp: 'tsl 9/2/2025 16:27:52'!
+!EvilAlienPresenter methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:27:52'!
 initialize
 	super initialize.
 	model := EvilAlien new.
@@ -380,7 +380,7 @@ initialize
 	view setLabel: 'EVIL ALIEN'.
 	view openInWorld.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 17:44:15'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 17:44:15'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -447,7 +447,7 @@ handleInput: aString
 			self restart ] .
 	}.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:34:23'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:34:23'!
 restart
 	model reset.
 	self restartInputs.
@@ -455,36 +455,36 @@ restart
 	view newPrompt.
 	view openInWorld.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 17:43:42'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 17:43:42'!
 restartInputs.
 	distance := nil.
 	xPosition := nil.
 	yPosition := nil.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:28:14'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:28:14'!
 showMessage: aMessage
 	view showMessage: aMessage.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:33:08'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:33:08'!
 showRequestDistanceMessage
 	self showMessage: 'Distance (0 to 9) ?'.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:32:42'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:32:42'!
 showRequestXPositionMessage
 	self showMessage: 'X position (0 to 9) ?'.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:32:51'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:32:51'!
 showRequestYPositionMessage
 	self showMessage: 'Y position (0 to 9) ?'.! !
 
-!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:33:27'!
+!EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:33:27'!
 start
 	self showMessage: model class gameDescription.
 	self showRequestXPositionMessage.
 	view newPrompt.
 	view openInWorld.! !
 
-!IntergalacticGamesPresenter methodsFor: 'initialization' stamp: 'tsl 8/31/2025 18:43:17'!
+!IntergalacticGamesPresenter methodsFor: 'initialization' stamp: 'tsl 31/Aug/2025 18:43:17'!
 initialize
 	super initialize.
 	model := IntergalacticGames new.
@@ -492,7 +492,7 @@ initialize
 	view setLabel: 'INTERGALACTIC GAMES'.
 	view openInWorld.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:48:37'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:48:37'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -550,7 +550,7 @@ handleInput: aString
 			self restart ] .
 	}.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 10:34:45'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 10:34:45'!
 restart
 	model reset.
 	self restartInputs.
@@ -558,28 +558,28 @@ restart
 	self showRequestAngleMessage.
 	view newPrompt.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 10:34:35'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 10:34:35'!
 restartInputs
 	angle := nil.
 	speed := nil.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 8/31/2025 18:43:55'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 31/Aug/2025 18:43:55'!
 showMessage: aMessage
 	view showMessage: aMessage.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 10:20:15'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 10:20:15'!
 showRequestAngleMessage
 	self showMessage: 'Enter angle (0-90)'.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 10:20:36'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 10:20:36'!
 showRequestSpeedMessage
 	self showMessage: 'Enter speed (0-40000)'.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 8/31/2025 18:49:52'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 31/Aug/2025 18:49:52'!
 showStartMessage
 	self showMessage: 'You must launch a satellite to a height of ', model height asString.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 10:23:37'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 10:23:37'!
 start
 	self showMessage: model class gameDescription.
 	self showStartMessage.
@@ -587,7 +587,7 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!MoonlanderPresenter methodsFor: 'initialization' stamp: 'tsl 9/7/2025 12:02:33'!
+!MoonlanderPresenter methodsFor: 'initialization' stamp: 'tsl 7/Sep/2025 12:02:33'!
 initialize
 	super initialize.
 	model := Moonlander new.
@@ -595,7 +595,7 @@ initialize
 	view setLabel: 'MOONLANDER'.
 	view openInWorld.! !
 
-!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:13:32'!
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:13:32'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -623,29 +623,29 @@ handleInput: aString
 	}.
 	! !
 
-!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:07:27'!
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:07:27'!
 restart
 	model reset.
 	self showStatusMessage.
 	view newPrompt.! !
 
-!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:06:05'!
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:06:05'!
 showMessage: aMessage
 	view showMessage: aMessage.! !
 
-!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:30:21'!
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:30:21'!
 showStatusMessage
 	self showMessage: 'Time ', model time asString, '; Height ', model height asString.
 	self showMessage: 'Vel. ', model velocity asString, '; Fuel ', model fuel asString.! !
 
-!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/7/2025 12:06:40'!
+!MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:06:40'!
 start
 	self showMessage: model class gameDescription.
 	self showStatusMessage.
 	view newPrompt.
 	view openInWorld.! !
 
-!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:27:01'!
+!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:27:01'!
 initialize
 	super initialize.
 	model := StarshipTakeOff new.
@@ -653,12 +653,12 @@ initialize
 	view setLabel: 'STARSHIP TAKE-OFF'.
 	view openInWorld.! !
 
-!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:49:42'!
+!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:49:42'!
 showStartMessage
 	self showMessage: 'Gravity =', model gravity asString.
 	self showMessage: 'Type in force'.! !
 
-!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/2/2025 16:36:02'!
+!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:36:02'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -686,24 +686,24 @@ handleInput: aString
 	}.
 	! !
 
-!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:37:48'!
+!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:37:48'!
 restart
 	model reset.
 	self showStartMessage.
 	view newPrompt.! !
 
-!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:37:00'!
+!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:37:00'!
 showMessage: aMessage
 	view showMessage: aMessage.! !
 
-!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:52:10'!
+!StarshipTakeOffPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:52:10'!
 start
 	self showMessage: model class gameDescription.
 	self showStartMessage.
 	view newPrompt.
 	view openInWorld.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'initialization' stamp: 'tsl 10/4/2025 15:24:27'!
+!TripIntoTheFuturePresenter methodsFor: 'initialization' stamp: 'tsl 4/Oct/2025 15:24:27'!
 initialize
 	super initialize.
 	model := TripIntoTheFuture new.
@@ -711,7 +711,7 @@ initialize
 	view setLabel: 'TRIP INTO THE FUTURE'.
 	view openInWorld.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/5/2025 19:50:18'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 5/Oct/2025 19:50:18'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -738,7 +738,7 @@ handleInput: aString
 	self showMessage: ''.
 	self restart.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:59:40'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:59:40'!
 restart
 	model reset.
 	self restartInputs.
@@ -746,28 +746,28 @@ restart
 	self showRequestSpeedMessage.
 	view newPrompt.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:56:45'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:56:45'!
 restartInputs
 	distance := nil.
 	speed := nil.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:26:21'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:26:21'!
 showMessage: aMessage
 	view showMessage: aMessage.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:58:42'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:58:42'!
 showRequestDistanceMessage
 	self showMessage: 'Distance of the trip'.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:57:58'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:57:58'!
 showRequestSpeedMessage
 	self showMessage: 'Speed of ship (0-1)'.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:55:36'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:55:36'!
 showStartMessage
 	self showMessage: 'You wish to return ', model yearsInTheFuture asString, ' years in the future.'.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 10/4/2025 15:59:03'!
+!TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 4/Oct/2025 15:59:03'!
 start
 	self showMessage: model class gameDescription.
 	self showStartMessage.
@@ -775,11 +775,11 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!ClassicGameModelMorph methodsFor: 'accessing' stamp: 'tsl 8/24/2025 19:18:10'!
+!ClassicGameModelMorph methodsFor: 'accessing' stamp: 'tsl 24/Aug/2025 19:18:10'!
 presenter: aPresenter
 	presenter := aPresenter ! !
 
-!ClassicGameModelMorph methodsFor: 'initialization' stamp: 'tsl 8/24/2025 19:23:06'!
+!ClassicGameModelMorph methodsFor: 'initialization' stamp: 'tsl 24/Aug/2025 19:23:06'!
 initialize
 	super initialize.
 	self color: Color black.
@@ -794,11 +794,11 @@ initialize
 
 	self refreshView.! !
 
-!ClassicGameModelMorph methodsFor: 'initialization' stamp: 'tsl 8/24/2025 19:18:59'!
+!ClassicGameModelMorph methodsFor: 'initialization' stamp: 'tsl 24/Aug/2025 19:18:59'!
 innerMorphClass
 	^ClassicGameInnerTextMorph! !
 
-!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 8/24/2025 19:24:24'!
+!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 24/Aug/2025 19:24:24'!
 acceptInput
 	| text |
 	text := inputBuffer withBlanksTrimmed.
@@ -807,22 +807,22 @@ acceptInput
 	self refreshView.
 	presenter handleInput: text.! !
 
-!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 8/24/2025 19:19:55'!
+!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 24/Aug/2025 19:19:55'!
 newPrompt
 	consoleText := consoleText , promptString.
 	inputBuffer := ''.
 	self refreshView.! !
 
-!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 8/24/2025 19:19:32'!
+!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 24/Aug/2025 19:19:32'!
 refreshView
 	self model actualContents: consoleText , inputBuffer.! !
 
-!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 8/24/2025 19:19:42'!
+!ClassicGameModelMorph methodsFor: 'as yet unclassified' stamp: 'tsl 24/Aug/2025 19:19:42'!
 showMessage: aString
 	consoleText := consoleText , aString , String crString.
 	self refreshView.! !
 
-!ClassicGameModelMorph methodsFor: 'events' stamp: 'tsl 10/4/2025 16:15:30'!
+!ClassicGameModelMorph methodsFor: 'events' stamp: 'tsl 4/Oct/2025 16:15:30'!
 keyStroke: evt
 
 	evt isReturnKey ifTrue: [
@@ -842,38 +842,39 @@ keyStroke: evt
 
 	^ true! !
 
-!ClassicGameModelMorph class methodsFor: 'instance creation' stamp: 'tsl 8/24/2025 19:17:04'!
+!ClassicGameModelMorph class methodsFor: 'instance creation' stamp: 'tsl 24/Aug/2025 19:17:04'!
 presenter: aPresenter
 	^ self basicNew
 		presenter: aPresenter ;
 		initialize ;
 		yourself! !
 
-!ClassicGameView methodsFor: 'accessing' stamp: 'tsl 8/28/2025 13:45:28'!
+!ClassicGameView methodsFor: 'accessing' stamp: 'tsl 28/Aug/2025 13:45:28'!
 presenter: aPresenter
 	presenter := aPresenter ! !
 
-!ClassicGameView methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:46:12'!
+!ClassicGameView methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:46:12'!
 newPrompt
 	textModelMorph newPrompt! !
 
-!ClassicGameView methodsFor: 'as yet unclassified' stamp: 'tsl 8/28/2025 13:46:02'!
+!ClassicGameView methodsFor: 'as yet unclassified' stamp: 'tsl 28/Aug/2025 13:46:02'!
 showMessage: aString
 	textModelMorph showMessage: aString! !
 
-!ClassicGameView methodsFor: 'initialization' stamp: 'tsl 8/28/2025 13:47:06'!
+!ClassicGameView methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:47:06'!
 initialize
 	super initialize.
 	textModelMorph := ClassicGameModelMorph presenter: presenter.
 	self addMorph: textModelMorph layoutSpec: LayoutSizeSpec new.! !
 
-!ClassicGameView class methodsFor: 'instance creation' stamp: 'tsl 8/28/2025 13:45:03'!
+!ClassicGameView class methodsFor: 'instance creation' stamp: 'tsl 28/Aug/2025 13:45:03'!
 presenter: aPresenter
 	^ self basicNew
 		presenter: aPresenter;
 		initialize ;
 		yourself! !
 
-!ClassicGameInnerTextMorph methodsFor: 'events' stamp: 'tsl 8/24/2025 19:17:42'!
+!ClassicGameInnerTextMorph methodsFor: 'events' stamp: 'tsl 13/Jan/2026 20:22:47'!
 keyStroke: aKeyboardEvent
+	aKeyboardEvent wasHandled: true.
 	^ self owner keyStroke: aKeyboardEvent! !
