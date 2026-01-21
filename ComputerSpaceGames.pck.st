@@ -1,6 +1,6 @@
-'From Cuis7.7 [latest update: #7797] on 13 January 2026 at 8:23:56 pm'!
+'From Cuis7.7 [latest update: #7801] on 21 January 2026 at 7:20:24 pm'!
 'Description Implementation of classic text-based games, based on the listings from the Computer Space Games magazine.'!
-!provides: 'ComputerSpaceGames' 1 5!
+!provides: 'ComputerSpaceGames' 1 6!
 SystemOrganization addCategory: #'ComputerSpaceGames-Model'!
 SystemOrganization addCategory: #'ComputerSpaceGames-View'!
 SystemOrganization addCategory: #'ComputerSpaceGames-Presenter'!
@@ -34,6 +34,16 @@ Object subclass: #Moonlander
 	category: 'ComputerSpaceGames-Model'!
 !classDefinition: 'Moonlander class' category: #'ComputerSpaceGames-Model'!
 Moonlander class
+	instanceVariableNames: ''!
+
+!classDefinition: #SpaceMines category: #'ComputerSpaceGames-Model'!
+Object subclass: #SpaceMines
+	instanceVariableNames: 'l p m fp ce y s c cp lp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Model'!
+!classDefinition: 'SpaceMines class' category: #'ComputerSpaceGames-Model'!
+SpaceMines class
 	instanceVariableNames: ''!
 
 !classDefinition: #StarshipTakeOff category: #'ComputerSpaceGames-Model'!
@@ -84,6 +94,16 @@ Object subclass: #MoonlanderPresenter
 	category: 'ComputerSpaceGames-Presenter'!
 !classDefinition: 'MoonlanderPresenter class' category: #'ComputerSpaceGames-Presenter'!
 MoonlanderPresenter class
+	instanceVariableNames: ''!
+
+!classDefinition: #SpaceMinesPresenter category: #'ComputerSpaceGames-Presenter'!
+Object subclass: #SpaceMinesPresenter
+	instanceVariableNames: 'model view cs ls fb lb'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ComputerSpaceGames-Presenter'!
+!classDefinition: 'SpaceMinesPresenter class' category: #'ComputerSpaceGames-Presenter'!
+SpaceMinesPresenter class
 	instanceVariableNames: ''!
 
 !classDefinition: #StarshipTakeOffPresenter category: #'ComputerSpaceGames-Presenter'!
@@ -200,10 +220,10 @@ initialize
 	maxAttempts := 8.
 	self reset.! !
 
-!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 31/Aug/2025 18:31:29'!
+!IntergalacticGames methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 21:19:35'!
 reset
 	attempts := 0.
-	height :=  1 + (1 to: 100  :: atRandom).! !
+	height :=  100 atRandom.! !
 
 !IntergalacticGames methodsFor: 'accessing' stamp: 'tsl 31/Aug/2025 18:32:33'!
 attemptsLeft
@@ -291,17 +311,145 @@ gameDescription
 	^ 'You are at the controls os a lunar module wich is taking a small team os astronauts down to the moon''s surface. In order to land safely you must slow down your descent, but that takes fuel and you have only a limited supply.
 Your computer will tell you your starting height, speed and fuel supply and ask how much fuel you wish to burn. It will then work out your new height and speed. A burn of 5 will keep your speed constant. A higher number will reduce it. Can you land safely on the moon?'! !
 
+!SpaceMines methodsFor: 'initialization' stamp: 'tsl 21/Jan/2026 19:03:33'!
+initialize
+	super initialize.
+	l := 3 atRandom + 5. "mines"
+	p := 60 atRandom + 40. "people"
+	m := (50 atRandom + 10) * p. "money"
+	fp := 40 atRandom + 80. "price of food"
+	ce := 40 atRandom + 80. "amount of ore produced per mine"
+
+	c := 0. "amount of ore in storage"
+	s := 1. "satisfaction factor"
+	y := 1. "year"! !
+
+!SpaceMines methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 19:54:14'!
+initializeC
+	c := c + (ce * l)! !
+
+!SpaceMines methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 21:23:44'!
+initializeCp
+	cp := 12 atRandom + 7! !
+
+!SpaceMines methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 21:23:54'!
+initializeLp
+	lp := 2000 atRandom + 2000! !
+
+!SpaceMines methodsFor: 'initialization' stamp: 'tsl 10/Jan/2026 11:15:11'!
+reset
+	self initialize ! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:34'!
+c
+	^ c! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:38'!
+ce
+	^ ce! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:34:21'!
+cp
+	^ cp! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:48'!
+fp
+	^ fp! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:52'!
+l
+	^ l! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:29'!
+lp
+	^ lp! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:33:58'!
+m
+	^ m! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:34:02'!
+p
+	^ p! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:34:05'!
+s
+	^ s! !
+
+!SpaceMines methodsFor: 'accessing' stamp: 'tsl 12/Jan/2026 16:34:10'!
+y
+	^ y! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 21:05:43'!
+buyFood: fb
+	m := m - fb.
+	fb / p  > 120 ifTrue: [ s := s + 0.1 ].
+	fb / p  < 80 ifTrue: [ s := s - 0.2 ].! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 18:10:41'!
+buyMines: lb
+	l := l + lb.
+	m := m - (lb * lp).
+	s < 0.6 ifTrue: [  ^#peopleRevolted ].
+	s > 1.1 ifTrue: [ ce := ce + (20 atRandom) ].
+	s < 0.9 ifTrue: [ ce := ce - (20 atRandom) ].
+	p / l < 10 ifTrue: [ ^#overworkedEveryone ].
+	s < 0.9 ifTrue: [ p := p - (10 atRandom) ].
+	p < 30 ifTrue: [  ^#notEnoughPeople ].
+	^#continue.! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 18:40:38'!
+ceIsHigh
+	ce >= 150
+		ifTrue: [
+			ce := ce // 2.
+			^ true ].
+	^ false! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 19:56:11'!
+doCycle
+	self initializeLp.
+	self initializeCp.
+	self initializeC.! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 20:01:21'!
+sellMines: ls
+	l := l - ls. 
+	m := m + (ls * lp).! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 20:01:29'!
+sellOres: cs
+	c := c - cs. 
+	m := m + (cs * cp).! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 10/Jan/2026 11:18:07'!
+updateYear
+	y := y + 1. ! !
+
+!SpaceMines methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 18:07:58'!
+verifyRadioactiveLeak
+	100 atRandom / 100 asFloat <= 0.01 
+		ifTrue: [
+			p := p // 2.
+			^ true ].
+	^ false! !
+
+!SpaceMines class methodsFor: 'nil' stamp: 'tsl 9/Jan/2026 16:09:10'!
+gameDescription
+	"Computer Space Games, page 24"
+	^ 'You are the newly elected leaderof a mining colony on the Planet Astron. All decisions concerning the sale of ore to Intergalactic Traders, food purchase and sale and purchase of mines are made by you. Can you keep the people satisfied and survive your 10 in office or will life in the colony end in disaster under your rule?'! !
+
 !StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:10:38'!
 initialize
 	super initialize.
 	maxAttempts := 10.
 	self reset.! !
 
-!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:44:26'!
+!StarshipTakeOff methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 21:18:05'!
 reset
 	attempts := 0.
-	gravity := 1 to: 20 :: atRandom.
-	weight := 1 to: 40 :: atRandom.
+	gravity := 20 atRandom.
+	weight := 40 atRandom.
 	secretNumber := gravity * weight.! !
 
 !StarshipTakeOff methodsFor: 'accessing' stamp: 'tsl 28/Aug/2025 13:15:11'!
@@ -372,13 +520,12 @@ gameDescription
 	^ 'Imagine you are in a spaceship travelling nearly as fast as light. Strangely time is passing more slowly inside your spaceship than outside. So, having set off on a long, fast space trip, you can return to Earth further in the future than the clocks inside your ship indicate.
 In this game, your computer tells you how many years must elapse on Earth before you return. You then decide the length of your trip (in light years) and the speed of your trip (as fraction of the speed of light) in order to achieve this. Take care not to travel too far too slowly or you will die of old age on the way.'! !
 
-!EvilAlienPresenter methodsFor: 'initialization' stamp: 'tsl 2/Sep/2025 16:27:52'!
+!EvilAlienPresenter methodsFor: 'initialization' stamp: 'tsl 21/Jan/2026 19:19:54'!
 initialize
 	super initialize.
 	model := EvilAlien new.
 	view := ClassicGameView presenter: self.
-	view setLabel: 'EVIL ALIEN'.
-	view openInWorld.! !
+	view setLabel: 'EVIL ALIEN'.! !
 
 !EvilAlienPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 17:44:15'!
 handleInput: aString
@@ -484,15 +631,14 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!IntergalacticGamesPresenter methodsFor: 'initialization' stamp: 'tsl 31/Aug/2025 18:43:17'!
+!IntergalacticGamesPresenter methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 19:32:06'!
 initialize
 	super initialize.
 	model := IntergalacticGames new.
 	view := ClassicGameView presenter: self.
-	view setLabel: 'INTERGALACTIC GAMES'.
-	view openInWorld.! !
+	view setLabel: 'INTERGALACTIC GAMES'.! !
 
-!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 2/Sep/2025 16:48:37'!
+!IntergalacticGamesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 19:34:36'!
 handleInput: aString
 	| number result |
 	number := [aString asNumber] 
@@ -503,16 +649,14 @@ handleInput: aString
 	angle isNil ifTrue: [
 		(number > 90 or:[ number < 0]) ifTrue: [
 			self showMessage: 'Invalid angle.'.
-			^ view newPrompt 
-			].
+			^ view newPrompt ].
 		angle := number.
 		self showRequestSpeedMessage.
 		^ view newPrompt ].
 
 	(number > 40000 or:[ number < 0]) ifTrue: [
 			self showMessage: 'Invalid speed.'.
-			^ view newPrompt 
-			].
+			^ view newPrompt ].
 	speed := number.
 
 	result := model checkLaunchAngle: angle speed: speed.
@@ -587,13 +731,12 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!MoonlanderPresenter methodsFor: 'initialization' stamp: 'tsl 7/Sep/2025 12:02:33'!
+!MoonlanderPresenter methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 19:32:12'!
 initialize
 	super initialize.
 	model := Moonlander new.
 	view := ClassicGameView presenter: self.
-	view setLabel: 'MOONLANDER'.
-	view openInWorld.! !
+	view setLabel: 'MOONLANDER'.! !
 
 !MoonlanderPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 7/Sep/2025 12:13:32'!
 handleInput: aString
@@ -645,13 +788,139 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:27:01'!
+!SpaceMinesPresenter methodsFor: 'initialization' stamp: 'tsl 15/Jan/2026 19:41:41'!
+initialize
+	super initialize.
+	model := SpaceMines new.
+	view := ClassicGameView presenter: self.
+	view setLabel: 'SPACE MINES'.! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 19:14:54'!
+doCycle
+	cs := nil.
+	ls := nil.
+	fb := nil.
+	lb := nil.
+	model doCycle.
+	self showStartMessage.
+	self nextInteraction.! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 19:19:16'!
+handleInput: aString
+	| number result |
+	number := [aString asNumber] 
+		on: Error do: [
+			self showMessage: 'Invalid input. Please enter a number.'.
+			^ view newPrompt ].
+
+	cs isNil ifTrue: [
+		(number < 0 or:[ number > model c ]) ifTrue: [
+			^ self nextInteraction ].
+		cs := number.
+		model sellOres: cs.
+		^ self nextInteraction ].
+
+	ls isNil ifTrue: [
+		(number < 0 or:[ number > model l ]) ifTrue: [
+			^ self nextInteraction ].
+		ls := number.
+		model sellMines: ls.
+		^ self nextInteraction. ].
+
+	fb isNil ifTrue: [
+		(number < 0 or:[ number > model m ]) ifTrue: [
+			^ self nextInteraction ].
+		fb := number.
+		model buyFood: fb.
+		^ self nextInteraction. ].
+
+	lb isNil ifTrue: [
+		(number < 0 or:[ (number * model lp) > model m ]) ifTrue: [
+			^ self nextInteraction ].
+		lb := number.
+		result := model buyMines: lb.
+
+		result caseOf: {
+			[#peopleRevolted] -> [ 
+				self showMessage: 'The people revolted.'.
+				self showMessage: ''.
+				self restart. ].
+			[#overworkedEveryone]  -> [ 
+				self showMessage: 'You overworked everyone.'.
+				self showMessage: ''.
+				self restart. ].
+			 [#notEnoughPeople] -> [ 
+				self showMessage: 'Not enough people left.'.
+				self showMessage: ''.
+				self restart ] .
+			[#continue] -> [ 
+				model verifyRadioactiveLeak 
+					ifTrue:[ self showMessage: 'Radioactive leak ... many die.' ].
+				model ceIsHigh ifTrue: [ self showMessage: 'Market glut - price drops.' ].
+				model updateYear.
+				model y >= 11
+					ifTrue: [
+						self showMessage: 'You survived your term of office.'.
+						self restart.]
+					ifFalse: [ self doCycle ]].
+
+		}].! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 18:29:09'!
+nextInteraction
+	cs isNil 
+		ifTrue: [ self showMessage: 'How much ore to sell?' ]
+		ifFalse: [
+			ls isNil 
+				ifTrue: [ self showMessage: 'How many mines to sell?' ]
+				ifFalse: [
+					fb isNil
+						ifTrue: [ 
+							self showMessage: 'You have $', model m asString.
+							self showMessage: 'Buying'.
+							self showMessage: 'How much to spend on food? (appr. $100 ea.)' ]
+						ifFalse:[
+							lb isNil ifTrue:[
+								self showMessage: 'How many more mines to buy?' ]]]].
+
+	view newPrompt.! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 19:15:11'!
+restart
+	model reset.
+	self doCycle.! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 9/Jan/2026 18:47:54'!
+showMessage: aMessage
+	view showMessage: aMessage.! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 21/Jan/2026 19:02:40'!
+showStartMessage
+	self showMessage: ''.
+	self showMessage: ('Year {1}' format: {model y asString}).
+	self showMessage: ('There are {1} people in the colony.' format: {model p asString}).
+	self showMessage: ('You have  {1} mines and {2} satisfaction factor {3}.' format: {model l asString . model m asString. model s asString }).
+	self showMessage: ''.
+	self showMessage: ('Your mines produced {1} tons of each ' format: {model ce asString}).
+	self showMessage: ('Ore in store = {1} tons ' format: {model c asString}).
+	self showMessage: 'Selling'.
+	self showMessage:  ('Ore selling price = {1}' format: {model cp asString}).
+	self showMessage:  ('Mine selling price = {1}/mine' format: {model lp asString}).! !
+
+!SpaceMinesPresenter methodsFor: 'as yet unclassified' stamp: 'tsl 20/Jan/2026 20:49:10'!
+start
+	self showMessage: model class gameDescription.
+	model doCycle.
+	self showStartMessage.
+	self nextInteraction .
+	view openInWorld.! !
+
+!StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 19:32:22'!
 initialize
 	super initialize.
 	model := StarshipTakeOff new.
 	view := ClassicGameView presenter: self.
-	view setLabel: 'STARSHIP TAKE-OFF'.
-	view openInWorld.! !
+	view setLabel: 'STARSHIP TAKE-OFF'.! !
 
 !StarshipTakeOffPresenter methodsFor: 'initialization' stamp: 'tsl 28/Aug/2025 13:49:42'!
 showStartMessage
@@ -703,13 +972,12 @@ start
 	view newPrompt.
 	view openInWorld.! !
 
-!TripIntoTheFuturePresenter methodsFor: 'initialization' stamp: 'tsl 4/Oct/2025 15:24:27'!
+!TripIntoTheFuturePresenter methodsFor: 'initialization' stamp: 'tsl 20/Jan/2026 19:32:28'!
 initialize
 	super initialize.
 	model := TripIntoTheFuture new.
 	view := ClassicGameView presenter: self.
-	view setLabel: 'TRIP INTO THE FUTURE'.
-	view openInWorld.! !
+	view setLabel: 'TRIP INTO THE FUTURE'.! !
 
 !TripIntoTheFuturePresenter methodsFor: 'as yet unclassified' stamp: 'tsl 5/Oct/2025 19:50:18'!
 handleInput: aString
