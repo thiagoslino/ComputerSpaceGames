@@ -1,6 +1,6 @@
 'From Cuis7.7 [latest update: #7801] on 21 January 2026 at 7:20:24 pm'!
 'Description Implementation of classic text-based games, based on the listings from the Computer Space Games magazine.'!
-!provides: 'ComputerSpaceGames' 1 6!
+!provides: 'ComputerSpaceGames' '1.6.0'!
 SystemOrganization addCategory: #'ComputerSpaceGames-Model'!
 SystemOrganization addCategory: #'ComputerSpaceGames-View'!
 SystemOrganization addCategory: #'ComputerSpaceGames-Presenter'!
